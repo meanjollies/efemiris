@@ -1,5 +1,5 @@
 # efemiris
-A lightweight, minimal, client-side web application designed to track satellite locations, render ground tracks, and calculate upcoming overhead passes within a 24-hour window.
+A lightweight, minimal, client-side web application designed to track satellite locations, render ground tracks, and calculate upcoming overhead passes within a 24-hour window. Check out [efemiris.haunted.sh](https://efemiris.haunted.sh) for a live demo.
 
 ## Structure
 ```
@@ -17,7 +17,7 @@ A lightweight, minimal, client-side web application designed to track satellite 
 ```
 
 ## Getting Started
-Get in loser, because we're going shopping for a dozen 5090s to run this bad boy. Just kidding. efemiris is built entirely as a client-side application, so it requires no heavy build steps, node modules, or backend environments. Check out [efemiris.haunted.sh](https://efemiris.haunted.sh) for a live demo.
+Get in loser, because we're going shopping for a dozen 5090s to run this bad boy. Just kidding. efemiris is built entirely as a client-side application, so it requires no heavy build steps, node modules, or backend environments.
 
 ### Running Locally
 1. Clone this repo:
