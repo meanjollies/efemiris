@@ -1,0 +1,106 @@
+<!--
+
+feedback? andrew at haunted dot sh
+github.com/meanjollies/efemiris
+
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>efemiris</title>
+  <meta name="description" content="A real-time satellite tracking and pass planner" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div id="app">
+  <div id="header">
+    <h1 title="A real-time satellite tracking and pass planner"><i class="ti ti-satellite" aria-hidden="true"></i>efemiris</h1>
+    <div id="chips-row">
+      <div id="sat-chips"></div>
+      <button id="add-sat-btn"><i class="ti ti-plus" aria-hidden="true"></i>Add satellite</button>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="map-wrap">
+      <div id="map"></div>
+      <div id="map-overlay">Click the map to set your location</div>
+    </div>
+    <div id="sidebar">
+      <div id="loc-bar">
+        <label>Observer location</label>
+        <div id="loc-row">
+          <input id="loc-input" type="text" placeholder="lat, lon  (e.g. 40.7, -74.0)" />
+          <button id="loc-btn"><i class="ti ti-current-location" aria-hidden="true"></i>Me</button>
+        </div>
+      </div>
+      <div id="passes-header">Upcoming passes (24h)</div>
+      <div id="passes-list">
+        <div class="empty-state">
+          <i class="ti ti-satellite" aria-hidden="true"></i>
+          Add a satellite above, then set a location to see upcoming passes
+        </div>
+      </div>
+      <div id="status-bar">
+        <span class="dot loading" id="status-dot"></span>
+        <span id="status-text">Ready</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search modal -->
+<div id="modal-backdrop"></div>
+<div id="search-modal" role="dialog" aria-label="Search satellites">
+  <div id="search-header">
+    <i class="ti ti-search" aria-hidden="true"></i>
+    <input id="search-input" type="text" placeholder="Search by satellite name or NORAD ID..." autocomplete="off" />
+    <button id="search-close" aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button>
+  </div>
+  <div id="search-results">
+    <div id="search-status">Start typing to search active satellites</div>
+  </div>
+  <div id="search-hint">
+    Only active satellites with current orbital data are shown.
+    Look up NORAD IDs at
+    <a href="https://celestrak.org/SATCAT/search.php" target="_blank">CelesTrak</a> or
+    <a href="https://www.n2yo.com" target="_blank">N2YO</a>
+  </div>
+</div>
+
+<div id="share-toast"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.1.4/satellite.min.js"></script>
+
+<script src="js/state.js"></script>
+<script src="js/map.js"></script>
+<script src="js/tle.js"></script>
+<script src="js/passes.js"></script>
+<script src="js/satellites.js"></script>
+<script src="js/search.js"></script>
+<script src="js/ui.js"></script>
+
+<script>
+  buildChips();
+  setStatus('ok', 'Ready');
+
+  // restore state from URL if a shared link was opened
+  restoreFromUrl();
+
+  // refresh ground tracks every 30 seconds
+  fetchAllDefaults().then(function() {
+    setInterval(function() { renderTracks(); }, 30000);
+  });
+</script>
+
+</body>
+</html>
