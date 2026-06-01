@@ -383,6 +383,7 @@ body {
 }
 #loc-input {
   flex: 1;
+  min-width: 0;
   font-family: inherit;
   font-size: 13px;
   padding: 6px 8px;
@@ -398,6 +399,7 @@ body {
   border-color: var(--blue);
 }
 #loc-btn {
+  flex-shrink: 0;
   font-family: inherit;
   font-size: 13px;
   padding: 0 12px;
