@@ -1,5 +1,3 @@
-// single source of truth for all mutable app state.
-
 var SATELLITES    = [];          // { id, name, noradId, color }
 var tleData       = {};          // { [satId]: { name, tle1, tle2 } }
 var activeSatIds  = new Set();   // satellites in the list
@@ -31,9 +29,9 @@ function escHtml(str) {
 
 // color palette for auto-assigning to user-added satellites
 var COLOR_POOL = [
-  '#185FA5','#854F0B','#3B6D11','#993556',
-  '#534AB7','#1D9E75','#BA7517','#0F6E56',
-  '#3C3489','#712B13','#0C447C','#27500A'
+  '#06b6d4','#a855f7','#f43f5e','#f59e0b',
+  '#10b981','#3b82f6','#84cc16','#ff4d4d',
+  '#d946ef','#2dd4bf','#38bdf8','#a7f3d0'
 ];
 var _colorIndex = 0;
 function nextColor() { return COLOR_POOL[_colorIndex++ % COLOR_POOL.length]; }
